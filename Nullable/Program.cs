@@ -69,7 +69,7 @@ class Program
 
         //Reading the file
         string filePath = @"C:\\MyData\\name.txt";
-        string content2 = File.ReadAllText(filePath);
+            string content2 = File.ReadAllText(filePath);
         Console.WriteLine(content2);
 
         string[] lines = File.ReadAllLines(filePath);

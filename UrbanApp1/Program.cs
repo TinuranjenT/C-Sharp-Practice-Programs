@@ -1,19 +1,19 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-//namespace UrbanApp
-//{
-//    class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            Console.WriteLine("Welcome to the service Booking app");
-//            User user1 = new User();
-//            user1.UserDetails();
+namespace UrbanApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to the service Booking app");
 
-//        }
-//    }
+
+        }
+    }
+}
 
 //    class User
 //    {
@@ -84,7 +84,7 @@
 //         public static void UserDashboard()
 //    {
 //        int userOption = DisplayUserDashboard();
-     
+
 //        switch (userOption)
 //        {
 //            case 1:
