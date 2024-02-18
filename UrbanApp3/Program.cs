@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace UrbanApp
 {
     class Program
-    {
+    {   
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the service Booking app");
@@ -185,79 +185,84 @@ namespace UrbanApp
         }
         public static void Role()
         {
-            Console.WriteLine("Choose the role:");
-            Console.WriteLine("1. User");
-            Console.WriteLine("2. Admin");
-            Console.WriteLine("3. Exit");
-
-            int role = Convert.ToInt32(Console.ReadLine());
-
-            switch (role)
+            try
             {
-                case 1:
-                    {
+                Console.WriteLine("Choose the role:");
+                Console.WriteLine("1. User");
+                Console.WriteLine("2. Admin");
+                Console.WriteLine("3. Exit");
+
+                int role = Convert.ToInt32(Console.ReadLine());
+
+                switch (role)
+                {
+                    case 1:
                         UserDashboard();
                         break;
-                    }
-                case 2:
-                    {
+                    case 2:
                         AdminDashboard();
                         break;
-                    }
-                case 3:
-                    {
-                        //Greetings();
+                    case 3:
                         Console.WriteLine("Thank you for visiting, Please visit again");
                         break;
-                    }
-                default:
-                    {
+                    default:
                         Console.WriteLine("Invalid role\nPlease enter a valid role");
                         Role();
                         break;
-                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected exception occurred: {ex.Message}");
             }
         }
+
         public static void Service()
         {
-          
-            Console.WriteLine("Choose the category:");
-            Console.WriteLine("1. Air Conditioner");
-            Console.WriteLine("2. Washing Machine");
-            Console.WriteLine("3. Painting");
-            Console.WriteLine("4. Sallon");
-            Console.WriteLine("5. Exit");
-
-            int choice = Convert.ToInt32(Console.ReadLine());
-
-            switch (choice)
+            try
             {
-                case 1:
-                    DisplayAcServices();
-                    BookService(choice);
-                    break;
-                case 2:
-                    DisplayWashingServices();
-                    BookService(choice);
-                    break;
-                case 3:
-                    DisplayPaintServices();
-                    BookService(choice);
-                    break;
-                case 4:
-                    DisplaySallonServices();
-                    BookService(choice);
-                    break;
+                Console.WriteLine("Choose the category:");
+                Console.WriteLine("1. Air Conditioner");
+                Console.WriteLine("2. Washing Machine");
+                Console.WriteLine("3. Painting");
+                Console.WriteLine("4. Sallon");
+                Console.WriteLine("5. Exit");
 
-                case 5:
-                    Greetings();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please enter a valid option.");
-                    Service();
-                    break;
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAcServices();
+                        BookService(choice);
+                        break;
+                    case 2:
+                        DisplayWashingServices();
+                        BookService(choice);
+                        break;
+                    case 3:
+                        DisplayPaintServices();
+                        BookService(choice);
+                        break;
+                    case 4:
+                        DisplaySallonServices();
+                        BookService(choice);
+                        break;
+                    case 5:
+                        Greetings();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please enter a valid option.");
+                        Service();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected exception occurred: {ex.Message}");
             }
         }
+
         public static void UserDashboard()
         {
             Console.WriteLine("Welcome to the user dashboard");
@@ -309,27 +314,34 @@ namespace UrbanApp
         }
         public static void BookAnotherService()
         {
-            Console.WriteLine("Press 1 to book another service, 2 to generate the bill, or 3 to exit:");
-            int option = Convert.ToInt32(Console.ReadLine());
-
-            switch (option)
+            try
             {
-                case 1:
-                    Service();
-                    break;
-                case 2:
-                    GenerateBill();
-                    break;
-                case 3:
-                    Greetings();
-                    break;
-                default:
-                    Console.WriteLine("Invalid option.Please enter a valid option");
-                    BookAnotherService();
-                    break;
-            }
+                Console.WriteLine("Press 1 to book another service, 2 to generate the bill, or 3 to exit:");
+                int option = Convert.ToInt32(Console.ReadLine());
 
+                switch (option)
+                {
+                    case 1:
+                        Service();
+                        break;
+                    case 2:
+                        GenerateBill();
+                        break;
+                    case 3:
+                        Greetings();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please enter a valid option");
+                        BookAnotherService();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected exception occurred: {ex.Message}");
+            }
         }
+
         public static void BookAcService()
         {
             AcService acService1 = new AcService();
@@ -342,15 +354,22 @@ namespace UrbanApp
             {
                 int value = acService[userOption];
                 Console.WriteLine("How Many Air conditioner need this service?");
-                int noOfAirConditioner = Convert.ToInt32(Console.ReadLine());
 
-                double totalValues = value * noOfAirConditioner;
-                double totalValueWithGst = totalValues + totalValues * 0.05;
-                Console.WriteLine(userOption + "has been added in the cart");
-                // Console.WriteLine(choice , value);
-                totalAmount += totalValueWithGst;
-                totalService.Add(userOption, totalValueWithGst);
-                BookAnotherService();
+                try
+                {
+                    int noOfAirConditioner = Convert.ToInt32(Console.ReadLine());
+
+                    double totalValues = value * noOfAirConditioner;
+                    double totalValueWithGst = totalValues + totalValues * 0.05;
+                    Console.WriteLine($"{userOption} has been added in the cart");
+                    totalAmount += totalValueWithGst;
+                    totalService.Add(userOption, totalValueWithGst);
+                    BookAnotherService();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An exception occurred: {ex.Message}");
+                }
             }
             else
             {
@@ -358,8 +377,8 @@ namespace UrbanApp
                 BookAcService();
                 //GetUserService();
             }
-
         }
+
         public static void BookWashingService()
         {
             WashingMachineService washingService1 = new WashingMachineService();
@@ -370,25 +389,38 @@ namespace UrbanApp
             if (washingService.Any(item => item.Key == userOption))
             {
                 int value = washingService[userOption];
-                Console.WriteLine("How Many Washing Machine need this service?");
-                int noOfWashingMachine = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine($"How Many Washing Machine need this service?");
 
-                double totalValues = value * noOfWashingMachine;
-                double totalValueWithGst = totalValues + totalValues * 0.05;
-                Console.WriteLine($"{userOption} has been added in the cart");
-                // Console.WriteLine(choice , value);
-                totalAmount += totalValueWithGst;
-                totalService.Add(userOption, totalValueWithGst);
-                BookAnotherService();
+                try
+                {
+                    int noOfWashingMachine = Convert.ToInt32(Console.ReadLine());
+
+                    if (noOfWashingMachine < 0)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a non-negative number.");
+                    }
+                    else
+                    {
+                        double totalValues = value * noOfWashingMachine;
+                        double totalValueWithGst = totalValues + totalValues * 0.05;
+                        Console.WriteLine($"{userOption} has been added in the cart");
+                        totalAmount += totalValueWithGst;
+                        totalService.Add(userOption, totalValueWithGst);
+                        BookAnotherService();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An exception occurred: {ex.Message}");
+                }
             }
             else
             {
                 Console.WriteLine("The entered service is not available, please enter another choice");
                 BookAnotherService();
-                //GetUserService();
             }
-
         }
+
         public static void BookPaintService()
         {
             PaintService paintService1 = new PaintService();
@@ -396,29 +428,41 @@ namespace UrbanApp
             Console.WriteLine($"Choose the {serviceName} you want to book:");
             string userOption = Console.ReadLine();
 
-
             if (paintService.Any(item => item.Key == userOption))
             {
                 int value = paintService[userOption];
-                Console.WriteLine("How Many square feet ?");
-                int noOfSquareFeet = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("How Many square feet?");
 
-                double totalValues = value * noOfSquareFeet;
-                double totalValueWithGst = totalValues + totalValues * 0.05;
-                Console.WriteLine($"{userOption} has been added in the cart");
-                // Console.WriteLine(choice , value);
-                totalAmount += totalValueWithGst;
-                totalService.Add(userOption, totalValueWithGst);
-                BookAnotherService();
+                try
+                {
+                    int noOfSquareFeet = Convert.ToInt32(Console.ReadLine());
+
+                    if (noOfSquareFeet < 0)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a non-negative number.");   
+                    }
+                    else
+                    {
+                        double totalValues = value * noOfSquareFeet;
+                        double totalValueWithGst = totalValues + totalValues * 0.05;
+                        Console.WriteLine($"{userOption} has been added in the cart");
+                        totalAmount += totalValueWithGst;
+                        totalService.Add(userOption, totalValueWithGst);
+                        BookAnotherService();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An exception occurred: {ex.Message}");
+                }
             }
             else
             {
                 Console.WriteLine("The entered service is not available, please enter another choice");
                 BookAnotherService();
-                //GetUserService();
             }
-
         }
+
         public static void BookSallonService()
         {
             SallonService sallonService1 = new SallonService();
@@ -429,74 +473,93 @@ namespace UrbanApp
             if (sallonService.Any(item => item.Key == userOption))
             {
                 int value = sallonService[userOption];
-                Console.WriteLine("How Many Person need this service ?");
-                int noOfPersons = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("How Many Person need this service?");
 
-                double totalValues = value * noOfPersons;
-                double totalValueWithGst = totalValues + totalValues * 0.05;
-                Console.WriteLine($"{userOption} has been added in the cart");
-                // Console.WriteLine(choice , value);
-                totalAmount += totalValueWithGst;
-                totalService.Add(userOption, totalValueWithGst);
-                BookAnotherService();
+                try
+                {
+                    int noOfPersons = Convert.ToInt32(Console.ReadLine());
+
+                    if (noOfPersons < 0)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a non-negative number.");
+                        // Handle the case where the input is not valid
+                    }
+                    else
+                    {
+                        double totalValues = value * noOfPersons;
+                        double totalValueWithGst = totalValues + totalValues * 0.05;
+                        Console.WriteLine($"{userOption} has been added in the cart");
+                        totalAmount += totalValueWithGst;
+                        totalService.Add(userOption, totalValueWithGst);
+                        BookAnotherService();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An exception occurred: {ex.Message}");
+                }
             }
             else
             {
                 Console.WriteLine("The entered service is not available, please enter another choice");
                 BookAnotherService();
-                //GetUserService();
             }
         }
+
         public static void BookService(int choice)
         {
-            switch (choice)
+            try
             {
-                case 1:
-                    {
+                switch (choice)
+                {
+                    case 1:
                         BookAcService();
                         break;
-                    }
-                case 2:
-                    {
+                    case 2:
                         BookWashingService();
                         break;
-                    }
-                case 3:
-                    {
+                    case 3:
                         BookPaintService();
                         break;
-                    }
-                case 4:
-                    {
+                    case 4:
                         BookSallonService();
                         break;
-                    }
-                case 5:
-                    {
+                    case 5:
                         Greetings();
                         break;
-                    }
-                default:
-                    {
-                        Console.WriteLine("Invalid Option.Please enter a valid option");
+                    default:
+                        Console.WriteLine("Invalid Option. Please enter a valid option.");
                         break;
-                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected exception occurred: {ex.Message}");
             }
         }
+
 
         public static void GenerateBill()
         {
-            Console.WriteLine($"Thank you for choosing our services!");
-            Console.WriteLine("Here is your bill:");
-
-            foreach (var service in totalService)
+            try
             {
-                Console.WriteLine(service.Key + " " + service.Value);
-            }
+                Console.WriteLine($"Thank you for choosing our services! ");
+                Console.WriteLine("Here is your bill:");
 
-            Console.WriteLine($"Total Amount: {totalAmount}");
-            Greetings();
+                foreach (var service in totalService)
+                {
+                    Console.WriteLine(service.Key + " " + service.Value);
+                }
+
+                Console.WriteLine($"Total Amount: {totalAmount}");
+                Greetings();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected exception occurred: {ex.Message}");
+            }
         }
+
     }
 
     public abstract class Service

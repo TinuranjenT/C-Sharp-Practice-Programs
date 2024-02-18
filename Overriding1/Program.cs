@@ -26,7 +26,7 @@ class Program
     {
         Employee e1 = new Employee();
         Console.WriteLine(e1.salary());
-        Employee m1=new Manager();
+        Employee m1 = new Manager();
         Console.WriteLine(m1.salary());
     }
 }

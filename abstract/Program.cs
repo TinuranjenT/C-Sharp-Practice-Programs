@@ -12,6 +12,7 @@ abstract class Shapes
     {
         Console.WriteLine("This is static method");
     }
+    
 }
 
 class Circle : Shapes

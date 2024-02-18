@@ -18,12 +18,17 @@ class Program
         //Non-Generic 
         ArrayList a1 = new ArrayList();  
         Console.WriteLine(a1.Add(2));   //returns the index at which the value is stored
-        a1.Add(3);
+        a1.Add(3);         //all the values are stored as object(boxing)
         a1.Add("Tinu");
         a1.Add('a');
 
-        int number = (int)a1[0];         //explicit type casting
+        int number = (int)a1[0];         //explicit type casting)(Unbxoing)
         Console.WriteLine("The first element is " + number);
+
+        string name1 = (string)a1[2];
+        Console.WriteLine("The name is " + name1);
+
+
 
         Console.WriteLine("Iniial list");
         foreach (object o in a1)
